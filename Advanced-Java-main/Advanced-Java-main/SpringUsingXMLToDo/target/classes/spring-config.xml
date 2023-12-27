@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+   
+   <bean id = "myBean1" class = "ToDo6.Course">
+   		<!-- Injecting the values for the properties using setters: Setter Injection -->
+   		<property name="courseID" value = "101"/>
+   		<property name="courseTitle" value= "JAVA"/>
+   		 <property name="courseDuration" value= "45"/>
+   		 <property name="courseProvider" value = "UDEMY"/>
+   		 <property name="courseFees" value="45788"/>
+   </bean> 
+
+
+	<bean id = "myBean2" class = "ToDo6.Course">
+		<!-- Injecting the values for the properties using parameterized constructor: Constructor Injection -->
+   		<constructor-arg  value = "1012"/>
+   	  	<constructor-arg value= "C++" />
+   		 <constructor-arg value= "78"/>
+   		 <constructor-arg value = "UNSTOP"/>
+   		 <constructor-arg value="6565"/>
+   </bean> 
+   
+   <bean id="myBean3" class="ToDo6.Course">
+		<!-- Injecting the values for the properties using parameterized constructor: Constructor Injection -->
+		<!-- Changing the order or  sequence -->
+		<constructor-arg  value = "103" index = "0"/>
+   	  	<constructor-arg value= "python" index = "2" />
+   		 <constructor-arg value= "34" index = "1"/>
+   		 <constructor-arg value = "youtube" index = "3"/>
+   		 <constructor-arg value="4578" index = "4"/>	
+	</bean>
+   
+</beans>

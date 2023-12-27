@@ -1,0 +1,265 @@
+Spring REST:
+		REST is a type of Web Service.
+		
+		What is a Web Service?
+			Web Service is a software system that supports inter-operable machine to machine interaction over the
+			network.
+			
+			It allows to have interaction between the applications irrespective of their technology and the platform
+			(Operating System). 
+			
+			Key Terminologies:
+				1. Inter-operable
+					It does not matter about the technology and the operating system.
+				2.Machine to Machine interaction
+					It involves application running on one machine interacting with application running on another machine.
+				3. Interaction over a network
+					Applications interact with each other using some network protocol.
+					
+			In Web Service standards, applications interact with each other by exchanging the information using some
+			common format.
+			
+			The format which is available for many years is XML: eXtensible Markup Language.
+			
+			When Web Services use XML as a medium for data exchange, they are precisely called as:
+			SOAP Based Web Services.
+			SOAP: Simple Object Access Protocol
+			SOAP is used send the XML data over HTTP.
+			Therefore SOAP = XML + HTTP
+			
+			In the last 5 to 6 years, another type of Web Service is in use that is REST.
+			It mainly makes use of the exchange format: JSON (Java Script Object Notation)
+			
+			REST is completely based upon HTTP.
+			REST is information-centric.
+			
+			It stands for REpresentational State Transfer.
+			
+			Representational:
+				REST resources can be represented in any form which is suitable to the consumer.
+				The most commonly used form is JSON.
+				
+			State:
+				The state of the resource is either populated on server side or client side as well.
+				It holds the current values.
+				
+			Transfer:
+				The state of the resource needs to be transferred from one application to another. 
+				
+	Implementing REST Services (APIs):
+		Different technologies provide their own way of building REST services.
+			E.g.
+				Java
+				Python
+				DOT NET
+				GoLang				
+				Node JS
+		
+	Implementing REST Services using Java:
+		Java provides several options for building REST services:
+		
+		1. Jersey Framework
+			An open source Java Based framework used for building REST API.
+			
+		2. Spring MVC Framework
+			Used to build REST API using Spring MVC capabilities.	
+			This option is suitable especially when REST resources are to be combined with a typical web application.
+			
+		3. Spring Boot Framework
+			Used to build REST API using several utilities.
+			It is very popular because it minimizes the configuration.
+			
+			It provides an embedded Tomcat as a container. Therefore there is no need to install Tomcat server
+			separately.
+			
+			There are several options available using Spring Boot for building REST API:
+			
+			1. Spring Boot Starter:
+				Spring Boot provides number of starter projects which can be used to build REST API.
+				IDEs like STS provide in-built plugin for Spring Boot Starter
+				
+			2. Spring Boot CLI:
+				It is a Command Line Interface that can be used to build REST API
+				
+			3. Spring Initializer:
+				It is a web interface that can be used to build REST API.
+				
+	Changing the Port No of Embedded Tomcat:
+		In order to handle any configuration of a Spring Boot project, there is a file provided known as:
+			'application.properties'
+		
+		It is located using 'src/main/resources'.
+		
+Building REST API:
+	To build REST API, it is necessary to create a Java Class. 
+	In order to indicate that this class is a REST API specific controller class, it must be annotated with
+	'@RestController' annotation.
+	
+	Once the class is defined, it is necessary to create a REST end point which is done by defining a method which
+	returns the REST resource.
+	
+	To configure this method as an end point, it is to be annotated with '@RequestMapping'.
+	
+	Since REST APIs are meant for building micro-service architecture, it is possible that these service can be
+	created using several technologies and platforms and 	they can interact with each other using plain HTTP 
+	protocol.
+	
+	When a REST API returns an object, while  sending it back to the client, it gets converted into JSON.
+	The JSON format looks as per the following:
+		{
+			"restaurantId":243,
+			"name":"Rangla Punjab",
+			"cuisine":"Punjabi",
+			"branchCount":5
+		}
+		
+	The conversion between Java object and JSON or vice versa is done using an API called as Jackson API.	
+	
+Spring Boot API:
+	Spring Boot API mainly provides 2 things:
+		1. '@SpringBootApplication' annotation
+		2. 'SpringApplication' class
+		
+	'@SpringBootApplication':
+		It is an annotation that is used to configure Spring Boot Application.
+		It is a combination of 3 annotations:
+			1. @Configuration
+			2. @ComponentScan
+			3. @EnableAutoConfiguration
+			
+		Due to this, it becomes convenient to handle the configuration unit.
+		
+	'SpringApplication':
+		It is class that is used to launch Spring Boot Application.
+		It provides a static method 'run()' which is used to kick start the application.
+		If there is an embedded tomcat server available, it gets launched using this method.
+		
+		It accepts the first parameter as a reference of 'Class' class for the class which is annotated with 
+		'@SpringBootApplication''
+		
+		These classes might be different.
+		
+		E.g.
+		@SpringBootApplication
+		public class SpringBootConfiguration {
+			//Some code
+		}
+		
+		public class SpringBootExample {
+			public static void main(String args[]){
+				SpringApplication.run(SpringBootConfiguration.class, args);
+			}
+		}
+		
+Implementing Layered Architecture in Spring REST:
+	Typically, Spring REST application has 3 layers:
+		1. Controller
+		2. Service
+		3. DAO
+	
+	Controller:
+		It is responsible for handling the request and sending the response in the form of JSON.
+	
+	Service:
+		It is responsible for handling any business logic.
+	
+	DAO:
+		It is responsible for handling persistence logic.
+		
+	In Spring REST, all these layers are implemented using Java Classes. But all these classes need to get managed
+	by Spring Boot.
+	
+	Therefore there are relevant stereotype annotations provided.
+	
+	E.g.
+		Controller	----->		@RestController
+		
+		Service		----->		@Service
+		
+		DAO			----->		@Repository
+		
+	In order to simplify handling different types of HTTP  requests, several annotations have been provided.
+	
+	E.g.
+		@GetMapping
+		@PostMapping
+		@PutMapping
+		@DeleteMapping
+		
+	E.g.
+	@PostMapping("/create")
+	is equivalent to
+	@RequestMapping(value = "/create", method = RequestMethod.POST)
+	
+	Accepting Parameters:
+	A REST API end point URL may have to accept parameters. In order to handle this, REST API makes use of 
+	'{ }' notation.
+	
+	E.g.
+	/[End-Point URL]/{param}
+	
+	Once the End Point URL is configured with parameter, it is necessary to bind the value of that parameter with
+	the local variable declared in the signature of the relevant request handling method. 
+	
+	This is done using an annotation called as '@PathVariable'. It is to be applied at the local variable level.
+	
+Handling a POST request:
+	Sometimes rather than fetching the data from server, client may want to send the data towards server to create
+	a new resource.
+	This is done by using HTTP POST request.
+	
+	In this, typically, client sends the data in JSON format which gets converted into Java Object.
+	Since this JSON data is attached to the HTTP Request, it is necessary to fetch that data from that request
+	for further operation. 
+	
+	This is done using an annotation known as '@RequestBody'. It is to be applied at the local variable level.
+	
+Monitoring REST End-points:
+	Whenever a REST API is built with several end points, it is necessary to test, monitor its functionality.
+	In case of HTTP GET request, it can be done using browser's address bar. In case of other types of requests,
+	either it can be tested by writing a client program using Vanilla JS, React, Angular, Vue and so on or using some
+	REST client.
+	
+	There are several REST clients available.
+	E.g.
+		POSTMAN
+		Google Talend API Tester
+		
+Interaction with DB:
+	In order to interact with database, the most commonly used pattern is DAO. It starts with a generic interface and
+	implemented by several implementation classes depending upon the domain requirement.
+	
+	Even though there are several DAO implementations, the overall code is same only the Entity type and the ID type
+	may change.
+	
+	Due to this it becomes easy to provide a standardized DAO which will behave depending upon the Entity Type and
+	ID Type.
+	
+	It is provided by a separate module known as Spring Data JPA.
+	It makes use of JPA as a persistence layer with underlying ORM which is Hibernate by default. 
+	
+	It provides an interface known as 'JpaRepository' which standardizes the persistence related operations.
+	In order to use Spring Data JPA, it is necessary to add the relevant dependency.
+	
+	Since JPA is interacting with database using Connection specific properties, it is necessary to configure them.
+	It is done using 'application.properties'.
+	
+	Since JPA persists data with the help of entities, there has to an entity specific class declared using '@Entity'
+	annotation.
+	
+	
+	
+	
+	
+	
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	

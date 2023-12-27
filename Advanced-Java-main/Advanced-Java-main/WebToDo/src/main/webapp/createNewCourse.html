@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body bgcolor="cyan">
+		<h2>Create New Course</h2>
+		<form action="createCourse" method="post">
+			<pre>
+				Course ID: <input type="text" name="courseId"/>
+				
+				Course Title: <input type="text" name="courseName"/>
+				
+				Course Duration: <input type="text" name="courseDuration"/>
+				
+				Course Provider: <select name="courseProvider">
+					<option>SELECT</option>
+					<option>Udemy</option>
+					<option>Unstop</option>
+					<option>YouTube</option>
+					<option>Intern</option>
+				</select>
+				
+				Course Fees: <input type="text" name="courseFees"/>
+				
+				<input type="submit" value="CREATE"/>
+			</pre>
+		</form>
+</body>
+</html>

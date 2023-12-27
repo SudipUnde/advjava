@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!-- Registering bean of type HelloService with some ID: myBean -->
+	<bean id="myBean" class="day7.WelcomeService"/>
+	<bean id="myBean2" class="day7.HelloService"/>
+	
+	<bean id="myBean3" class = "day8.UserService"/>
+    <bean id="myBean4" class="day8.UserService" lazy-init="true"/>
+	<bean id="myBean5" class="day8.UserService" scope="prototype"/>
+	
+	<bean id="myBean6" class="day8.UserGreetingService">
+		<!-- Injecting the values for the properties using setters: Setter Injection -->
+		<property name="userName" value="shubham"/>
+		<property name="greetingMessage" value="Good Afternoon"/>
+		<property name="userAge" value="45"/>		
+	</bean>
+	
+	<bean id="myBean7" class="day8.UserGreetingService">
+		<!-- Injecting the values for the properties using parameterized constructor: Constructor Injection -->
+		<constructor-arg value="shubhya"/>
+		<constructor-arg value="Hello"/>
+		<constructor-arg value="25"/>		
+	</bean>
+	
+	<bean id="myBean8" class="day8.UserGreetingService">
+		<!-- Injecting the values for the properties using parameterized constructor: Constructor Injection -->
+		<!-- Changing the order or  sequence -->
+		<constructor-arg value="37" index="1"/>
+		<constructor-arg value="ramya" index="2"/>
+		<constructor-arg value="Hi" index="0"/>		
+	</bean>
+	
+	<!-- Configuring  Outer Bean: Customer -->
+	<bean id="myCustomer" class="day8.Customer">
+		<property name="customerId" value="101"/>
+		<property name="name" value="Shubham"/>
+		<property name="permanentAddress" ref="myAddress"/>
+		<!-- Use the following with 'ref' element if requried-->
+		<!-- <property name="permanentAddress" >
+			<ref bean="myAddress"/>
+		</property> -->
+	</bean>
+	
+	<!-- Configuring  Inner Bean: Address -->
+	<bean id="myAddress" class="day8.Address">
+		<property name="city" value="Pune"/>
+		<property name="pinCode" value="411045"/>
+	</bean>
+	<!-- Configuring one more Inner Bean: Address -->
+	<bean id="myAddress2" class="day8.Address">
+		<property name="city" value="Mumbai"/>
+		<property name="pinCode" value="411344"/>
+	</bean>
+	
+</beans>
